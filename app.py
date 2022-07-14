@@ -7,7 +7,7 @@ def homepage():
     return "Test"
 
 @app.route('/getFirstName', methods=['GET'])
-def getName():
+def getFirstName():
     name = {
         "firstName": "Nishant"
     }
@@ -15,7 +15,7 @@ def getName():
     return result
 
 @app.route('/getLastName', methods=['GET'])
-def getName():
+def getLastName():
     name = {
         "lastName": "Gada"
     }
