@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
@@ -28,12 +29,12 @@ def getUserDetails():
         "name": "Nishant Gada",
         "email": "test@gmail.com",
         "phone": "9022379777",
-        "posts": "10",
+        "bio": "Namaste",
+        "number_of_posts": "10",
+        "posts": [],
         "followers": "10,000",
-        "following": "250"
+        "following": "250",
     })
-    result = jsonify(name)
-    return result
     
 
 if __name__ == '__main__':
