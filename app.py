@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 import json
 
+from common_functions.KeyMissingErrorResponse import KeyMissingErrorResponse
+
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
@@ -20,7 +22,27 @@ def getFirstName():
 def saveUserDetails():
 
     if request.method == 'POST':
-        return({
+
+        DATA = request.json
+
+        if not DATA.__contains__("name"):
+            return KeyMissingErrorResponse("name key Missing")
+        if not DATA.__contains__("email"):
+            return KeyMissingErrorResponse("email key Missing")
+        if not DATA.__contains__("phone"):
+            return KeyMissingErrorResponse("phone key Missing")
+        if not DATA.__contains__("bio"):
+            return KeyMissingErrorResponse("bio key Missing")
+        if not DATA.__contains__("number_of_posts"):
+            return KeyMissingErrorResponse("number_of_posts key Missing")
+        if not DATA.__contains__("posts"):
+            return KeyMissingErrorResponse("posts key Missing")
+        if not DATA.__contains__("followers"):
+            return KeyMissingErrorResponse("followers key Missing")
+        if not DATA.__contains__("following"):
+            return KeyMissingErrorResponse("following key Missing")
+
+        response = {
             "status": "Success",
             "description": "User details saved successfully",
             "data": {
@@ -33,7 +55,8 @@ def saveUserDetails():
                 "followers": request.json['followers'],
                 "following": request.json['following'],
             }
-        })
+        }
+        return jsonify(response)
 
 
 @app.route('/getUserDetails', methods=['GET'])
