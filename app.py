@@ -21,6 +21,19 @@ def getLastName():
     }
     result = jsonify(name)
     return result
+
+@app.route('/getUserDetails', methods=['GET'])
+def getUserDetails():
+    return({
+        "name": "Nishant Gada",
+        "email": "test@gmail.com",
+        "phone": "9022379777",
+        "posts": "10",
+        "followers": "10,000",
+        "following": "250"
+    })
+    result = jsonify(name)
+    return result
     
 
 if __name__ == '__main__':
