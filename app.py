@@ -21,42 +21,55 @@ def getFirstName():
 @app.route('/saveUserDetails', methods=['POST'])
 def saveUserDetails():
 
-    if request.method == 'POST':
+    try:
+        if request.method == 'POST':
 
-        DATA = request.json
+            DATA = request.json
 
-        if not DATA.__contains__("name"):
-            return KeyMissingErrorResponse("name key Missing")
-        if not DATA.__contains__("email"):
-            return KeyMissingErrorResponse("email key Missing")
-        if not DATA.__contains__("phone"):
-            return KeyMissingErrorResponse("phone key Missing")
-        if not DATA.__contains__("bio"):
-            return KeyMissingErrorResponse("bio key Missing")
-        if not DATA.__contains__("number_of_posts"):
-            return KeyMissingErrorResponse("number_of_posts key Missing")
-        if not DATA.__contains__("posts"):
-            return KeyMissingErrorResponse("posts key Missing")
-        if not DATA.__contains__("followers"):
-            return KeyMissingErrorResponse("followers key Missing")
-        if not DATA.__contains__("following"):
-            return KeyMissingErrorResponse("following key Missing")
+            if not DATA.__contains__("name"):
+                return KeyMissingErrorResponse("name key Missing")
+            if not DATA.__contains__("email"):
+                return KeyMissingErrorResponse("email key Missing")
+            if not DATA.__contains__("phone"):
+                return KeyMissingErrorResponse("phone key Missing")
+            if not DATA.__contains__("bio"):
+                return KeyMissingErrorResponse("bio key Missing")
+            if not DATA.__contains__("number_of_posts"):
+                return KeyMissingErrorResponse("number_of_posts key Missing")
+            if not DATA.__contains__("posts"):
+                return KeyMissingErrorResponse("posts key Missing")
+            if not DATA.__contains__("followers"):
+                return KeyMissingErrorResponse("followers key Missing")
+            if not DATA.__contains__("following"):
+                return KeyMissingErrorResponse("following key Missing")
+            if not DATA.__contains__("username"):
+                return KeyMissingErrorResponse("username key Missing")
 
-        response = {
-            "status": "Success",
-            "description": "User details saved successfully",
-            "data": {
-                "name": request.json['name'],
-                "email": request.json['email'],
-                "phone": request.json['phone'],
-                "bio": request.json['bio'],
-                "number_of_posts": request.json['number_of_posts'],
-                "posts": request.json['posts'],
-                "followers": request.json['followers'],
-                "following": request.json['following'],
+            response = {
+                "Success": "True",
+                "description": "User details saved successfully",
+                "data": {
+                    "name": request.json['name'],
+                    "email": request.json['email'],
+                    "phone": request.json['phone'],
+                    "bio": request.json['bio'],
+                    "number_of_posts": request.json['number_of_posts'],
+                    "posts": request.json['posts'],
+                    "followers": request.json['followers'],
+                    "following": request.json['following'],
+                    "username": request.json['username'],
+                }
             }
+            response = jsonify(response)
+
+    except Exception as e:
+        response = {
+            "Success": "False",
+            "Message": "Technical Error",
+            "Description": e
         }
-        return jsonify(response)
+
+    return response
 
 
 @app.route('/getUserDetails', methods=['GET'])
@@ -70,6 +83,7 @@ def getUserDetails():
             "posts": [],
             "followers": "10,000",
             "following": "250",
+            "username": "nishantgada"
         })
     
 
